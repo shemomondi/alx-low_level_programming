@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlip.h>
-#incluse <time.h>
+#include <time.h>
 
 /**
  * main - Entry point
@@ -14,7 +14,7 @@ int main(void)
 
 	for (d = '0'; d < '9'; d++)
 	{
-	
+
 	for (p = d + 1; p <= '9'; p++)
 	{
 	if (p != d)
