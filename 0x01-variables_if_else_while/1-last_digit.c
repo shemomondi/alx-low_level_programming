@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
-
+/* more headers goes there */
 /**
  * main - Print if the number is positive,zero or negative
  * Return: 0 (Success)
  *
  */
-
+/* betty style doc for function main goes there */
 int main(void)
 
 {
@@ -29,5 +29,6 @@ int main(void)
 	{
 	printf("Last digit of %d is %d and is less than 6 not 0\n", n, lastd);
 	}
+	/* your code goes there */
 	return (0);
 }
