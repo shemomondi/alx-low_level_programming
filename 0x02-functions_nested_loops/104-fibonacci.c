@@ -1,4 +1,4 @@
-#include <stdio.h>
+:#include <stdio.h>
 
 /**
  * main - fibonacci <3
@@ -45,3 +45,4 @@ int main(void)
 	printf("\n");
 	return (0);
 }
+
