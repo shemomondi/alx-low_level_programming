@@ -14,19 +14,19 @@ listint_t *fast = head;
 if (!head)
 return (NULL);
 
-while (slow && fast && fast->next)
+while (slower & faster && faster->next)
 {
-fast = fast->next->next;
-slow = slow->next;
-if (fast == slow)
+faster = faster->next->next;
+slower = slower->next;
+if (faster == slower)
 {
-slow = head;
-while (slow != fast)
+slower = head;
+while (slower != faster)
 {
-slow = slow->next;
-fast = fast->next;
+slower = slower->next;
+faster = faster->next;
 }
-return (fast);
+return (faster);
 }
 }
 
