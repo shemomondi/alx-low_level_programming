@@ -14,7 +14,7 @@ unsigned int flip_bits(unsigned long int n, unsigned long int m)
 	unsigned long int now;
 	unsigned long int absolute = n ^ m;
 
-	for (j = 64; j >= 0; j--)
+	for (j = 63; j >= 0; j--)
 	{
 		now = absolute >> j;
 		if (now & 1)
