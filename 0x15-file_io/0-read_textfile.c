@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stdlib.h>
+
 
 /**
  * read_textfile - reads a text file and prints the letters
