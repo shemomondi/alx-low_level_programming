@@ -1,165 +1,190 @@
-# Project Name
+# C - Search Algorithms
 
-**0x1E. C - Search Algorithms**
+This was my ALX project on search algorithms. I implemented
+various types of search algorithms and stated the corresponding space/time
+complexities for each.
 
-## Author's Details
+## Tests :heavy_check_mark:
 
-Name: _Shem Omondi._
+* [tests](./tests): Folder of test files for all tasks. Provided by ALX.
 
-Email: *shemomondi746@gmail.com*
+## Helper Files :raised_hands:
 
-Tel: _+254717120102._
+* [listint](./listint): Folder of helper files for task 12, singly linked list
+jump search.
+  * [create_list.c](./listint/create_list.c): C function that creates a `listint_t`
+singly linked list.
+  * [free_list.c](./listint/free_list.c): C function that frees a `listint_t`
+singly linked list.
+  * [print_list.c](./listint/print_list.c): C function that prints the contents
+of a `listint_t` singly linked list.
 
-## Requirements
+* [skiplist](./skiplist): Folder of helper files for task 13, singly skipped list
+jump search.
+  * [create_skiplist.c](./skiplist/create_skiplist.c): C function that creates
+a `skiplist_t` singly skipped list.
+  * [free_skiplist.c](./skiplist/free_skiplist.c): C function that frees a
+`skiplist_t` singly skipped list.
+  * [print_skiplist.c](./skiplist/print_skiplist.c): C function that prints the
+contents of a `skiplist_t` singly skipped list.
 
-- Allowed editors: `vi`, `vim`, `emacs`.
-- All your files will be executed/compiled on Ubuntu 20.04 LTS using the options `-Wall -Werror -Wextra -pedantic -std=gnu89`.
-- Version of `gcc`: 9.3.0.
-- Version of `make`: GNU Make 4.2.1.
-- All your files should end with a new line.
-- The `main.c` file is used to test your functions, but you don’t have to push them to your repo.
-- You are only allowed to use the `printf` function of the standard library. Any call to another function like `strdup`, `malloc`, … is forbidden.
-- The prototypes of all your functions should be included in your header file called `search_algos.h`.
-- All your header files should be include guarded.
+## Header File :file_folder:
 
-## Project Description
+* [search_algos.h](./search_algos.h): Header file containing definitions and
+prototypes for all types and functions written for the project.
 
-Learn what is a search algorithm.
-What are linear and binary searches and what is the best search algorithm to use depending on your needs.
+Data Structures
+```
+/**
+ * struct listint_s - singly linked list
+ *
+ * @n: Integer
+ * @index: Index of the node in the list
+ * @next: Pointer to the next node
+ *
+ * Description: singly linked list node structure
+ * for ALX project
+ */
+typedef struct listint_s
+{
+    int n;
+    size_t index;
+    struct listint_s *next;
+} listint_t;
 
-- **0. Linear search** - Write a function that searches for a value in an array of integers using the `Linear search algorithm`. - ` 0-linear.c`.
+/**
+ * struct skiplist_s - Singly linked list with an express lane
+ *
+ * @n: Integer
+ * @index: Index of the node in the list
+ * @next: Pointer to the next node
+ * @express: Pointer to the next node in the express lane
+ *
+ * Description: singly linked list node structure with an express lane
+ * for Holberton project
+ */
+typedef struct skiplist_s
+{
+    int n;
+    size_t index;
+    struct skiplist_s *next;
+    struct skiplist_s *express;
+} skiplist_t;
+```
 
-  ```
-  wilfried@0x1E-search_algorithms$ cat 0-main.c
-  #include <stdio.h>
-  #include <stdlib.h>
-  #include "search_algos.h"
+Function Prototypes
 
-  /**
-  * main - Entry point
-  *
-  * Return: Always EXIT_SUCCESS
-  */
-  int main(void)
-  {
-  		int array[] = {
-  				10, 1, 42, 3, 4, 42, 6, 7, -1, 9
-  		};
-  		size_t size = sizeof(array) / sizeof(array[0]);
+| File                    | Prototype                                                       |
+| ----------------------- | --------------------------------------------------------------- |
+| `0-linear.c`            | `int linear_search(int *array, size_t size, int value);`        |
+| `1-binary.c`            | `int binary_search(int *array, size_t size, int value);`        |
+| `100-jump.c`            | `int jump_search(int *array, size_t size, int value);`          |
+| `102-interpolation.c`   | `int interpolation_search(int *array, size_t size, int value);` |
+| `103-exponential.c`     | `int exponential_search(int *array, size_t size, int value);`   |
+| `104-advanced_binary.c` | `int advanced_binary(int *array, size_t size, int value);`      |
 
-  		printf("Found %d at index: %d\n\n", 3, linear_search(array, size, 3));
-  		printf("Found %d at index: %d\n\n", 42, linear_search(array, size, 42));
-  		printf("Found %d at index: %d\n", 999, linear_search(array, size, 999));
-  		return (EXIT_SUCCESS);
-  }
-  wilfried@0x1E-search_algorithms$ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 0-main.c 0-linear.c -o 0-linear
-  wilfried@0x1E-search_algorithms$ ./0-linear
-  Value checked array[0] = [10]
-  Value checked array[1] = [1]
-  Value checked array[2] = [42]
-  Value checked array[3] = [3]
-  Found 3 at index: 3
+## Tasks :page_with_curl:
 
-  Value checked array[0] = [10]
-  Value checked array[1] = [1]
-  Value checked array[2] = [42]
-  Found 42 at index: 2
+* **0. Linear search**
+  * [0-linear.c](./0-linear.c): C function that searches for a value in an array
+  of integers using linear search.
+  * If the value is not present or the array is `NULL`, returns `-1`.
+	* Otherwise, returns the first index where `value` is located.
 
-  Value checked array[0] = [10]
-  Value checked array[1] = [1]
-  Value checked array[2] = [42]
-  Value checked array[3] = [3]
-  Value checked array[4] = [4]
-  Value checked array[5] = [42]
-  Value checked array[6] = [6]
-  Value checked array[7] = [7]
-  Value checked array[8] = [-1]
-  Value checked array[9] = [9]
-  Found 999 at index: -1
-  ```
+* **1. Binary search**
+  * [1-binary.c](./1-binary.c): C function that searches for a value in a sorted
+  array of integers using binary search.
+  * Assumes the array is sorted in ascending order and that the value to search
+  for is not repeated in the array.
+  * If the value is not present or the array is `NULL`, returns `-1`.
+	* Otherwise, returns the index where `value` is located.
 
----
+* **2. Big O #0**
+  * [2-O](./2-O): Text file containing the worst case time complexity of linear
+  search.
 
-- **1. Binary search** - Write a function that searches for a value in a sorted array of integers using the `Binary search algorithm`. - `1-Makefile`.
+* **3. Big O #1**
+  * [3-O](./3-O): Text file containing the worst case space complexity of
+  iterative linear search.
 
-  ```
-  wilfried@0x1E-search_algorithms$ cat 1-main.c
-  #include <stdio.h>
-  #include <stdlib.h>
-  #include "search_algos.h"
+* **4. Big O #2**
+  * [4-O](./4-O): Text file containing worst case case time complexity
+  of binary search.
 
-  /**
-  * main - Entry point
-  *
-  * Return: Always EXIT_SUCCESS
-  */
-  int main(void)
-  {
-  		int array[] = {
-  				0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-  		};
-  		size_t size = sizeof(array) / sizeof(array[0]);
+* **5. Big O #3**
+  * [5-O](./5-O): Text file containing the worst case space complexity
+  of binary search.
 
-  		printf("Found %d at index: %d\n\n", 2, binary_search(array, size, 2));
-  		printf("Found %d at index: %d\n\n", 5, binary_search(array, 5, 5));
-  		printf("Found %d at index: %d\n", 999, binary_search(array, size, 999));
-  		return (EXIT_SUCCESS);
-  }
-  wilfried@0x1E-search_algorithms$ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 1-main.c 1-binary.c -o 1-binary
-  wilfried@0x1E-search_algorithms$ ./1-binary
-  Searching in array: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-  Searching in array: 0, 1, 2, 3
-  Searching in array: 2, 3
-  Found 2 at index: 2
+* **6. Big O #4**
+  * [6-O](./6-O): Text file containing the space complexity of the following algorithm:
+```
+int **allocate_map(int n, int m)
+{
+    int **map;
 
-  Searching in array: 0, 1, 2, 3, 4
-  Searching in array: 3, 4
-  Searching in array: 4
-  Found 5 at index: -1
+    map = malloc(sizeof(int *) * n);
+    for (size_t i = 0; i < n; i++)
+    {
+        map[i] = malloc(sizeof(int) * m);
+		}
+		return (map);
+}
+```
 
-  Searching in array: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-  Searching in array: 5, 6, 7, 8, 9
-  Searching in array: 8, 9
-  Searching in array: 9
-  Found 999 at index: -1
-  ```
+* **7. Jump search**
+  * [100-jump.c](./100-jump.c): C function that searches for a value in a
+  sorted array of integers using jump search.
+  * Uses the square root of the size of the array as the jump step.
+  * Assumes the array is sorted in ascending order and that the value to search
+  for is not repeated in the array.
+  * If the value is not present or the array is `NULL`, returns `-1`.
+	* Otherwise, returns the index where `value` is located.
 
----
+* **8. Big O #5**
+  * [101-O](./101-O): Text file containing the average case time complexity of
+  jump search in an array of size `n` using `step = sqrt(n)`.
 
-- **2. Big O #0** - What is the time complexity (worst case) of a linear search in an array of size n? - `2-O`.
+* **9. Interpolation search**
+  * [102-interpolation.c](./102-interpolation.c): C function that searches for
+  a value in a sorted array of integers using interpolation search.
+  * Assumes the array is sorted in ascending order.
+  * If the value is not present or the array is `NULL`, returns `-1`.
+	* Otherwise, returns the first index where `value` is located.
 
----
+* **10. Exponential search**
+  * [103-exponential.c](./103-exponential.c): C function that searches for a
+  value in a sorted array of integers using exponential search.
+  * Uses powers of 2 as exponential ranges to search the array.
+  * Assumes the array is sorted in ascending order.
+  * If the value is not present or the array is `NULL`, returns `-1`.
+	* Otherwise, returns the first index where `value` is located.
 
-- **3. Big O #1** - What is the space complexity (worst case) of an iterative linear search algorithm in an array of size n? - `3-O`.
+* **11. Advanced binary search**
+  * [104-advanced_binary.c](./104-advanced_binary.c): C function that searches
+  for a value in a sorted array of integers using advanced binary search.
+  * Assumes the array is sorted in ascending order.
+  * If the value is not present or the array is `NULL`, returns `-1`.
+	* Otherwise, returns the first index where `value` is located.
 
----
+* **12. Jump search in a singly linked list**
+  * [105-jump_list.c](./105-jump_list.c): C function that searches for a value
+  in a `listint_t` sorted singly linked list of integers using jump search.
+  * Uses the square root of the list size as the jump step.
+  * Assumes that the singly linked list is sorted in ascending order.
+	* If the value is not present or the head of the list is `NULL`, returns `NULL`.
+	* Otherwise, returns a pointer to the first node where `value` is located.
 
-- **4. Big O #2** - What is the time complexity (worst case) of a binary search in an array of size n? - `4-O`.
+* **13. Linear search in a skip list**
+  * [106-linear_skip.c](./106-linear_skip.c): C function that searches for a value
+  in a `skiplist_t` sorted skipped linked list of integers using jump search.
+  * Assumes that the singly linked list is sorted in ascending order.
+	* If the value is not present or the head of the list is `NULL`, returns `NULL`.
+	* Otherwise, returns a pointer to the first node where `value` is located.
 
----
+* **14. Big O #6**
+  * [107-O](./107-O): Text file containing the average time complexity of jump
+  search in a singly linked list of size `n`, using `step = sqrt(n)`.
 
-- **5. Big O #3** - What is the space complexity (worst case) of a binary search in an array of size n? - `5-O`.
-
----
-
-- **6. Big O #4** -What is the space complexity of this function / algorithm? - `2-O`.
-
-  ```
-  int **allocate_map(int n, int m)
-  {
-  		int **map;
-
-  		map = malloc(sizeof(int *) * n);
-  		for (size_t i = 0; i < n; i++)
-  		{
-  					map[i] = malloc(sizeof(int) * m);
-  		}
-  		return (map);
-  }
-  ```
-
----
-
-## Collaborate
-
-To collaborate, reach me through my email address shemomondi746@gmail.com.
+* **15. Big O #7**
+  * [108-O](./108-O): Text file containing the average time complexity of jump
+  search in a sorted skipped linked list of of size `n`, using `step = sqrt(n)`.
